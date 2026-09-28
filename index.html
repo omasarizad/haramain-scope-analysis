@@ -417,6 +417,38 @@
     border: 1px solid var(--danger);
   }
 
+  .breakdown-table td:first-child { font-weight: 600; }
+  .breakdown-table .subtotal td { background: var(--surface); font-weight: 700; }
+  .breakdown-table .grand-total td { background: var(--danger-light); font-weight: 700; color: var(--danger); }
+  .breakdown-table td.num, .breakdown-table th.num { text-align: center; }
+
+  .artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+
+  .artifact-card {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .artifact-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .artifact-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
   .big-number {
     font-size: 3rem;
     font-weight: 800;
@@ -641,9 +673,85 @@
   </tbody>
 </table>
 
-<!-- Section 4: UX Reality -->
-<h2><span class="num">4</span> The UX Reality</h2>
-<p>The platform serves <strong>7 distinct user roles</strong> across <strong>3 separate platforms</strong>. Each role has different goals and interaction patterns — and each platform is a separate design surface. This project shares our time with active projects:</p>
+<!-- Section 4: Design Files Estimation -->
+<h2><span class="num">4</span> Estimated Design Files & Artifacts</h2>
+<p>Every system needs screens across 3 platforms (CMS admin panel, website pages with responsive variants, mobile app). On top of screens: research, flows, wireframes, prototypes, usability tests, and a shared design system. Here is the breakdown:</p>
+
+<h3>Screens per Axis × Platform</h3>
+<table class="breakdown-table">
+  <thead>
+    <tr><th>Axis</th><th class="num">CMS Admin</th><th class="num">Website (Desktop)</th><th class="num">Responsive (Tab+Mob)</th><th class="num">Mobile App</th><th class="num">Total</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Content Services (6 sys)</td><td class="num">30</td><td class="num">16</td><td class="num">32</td><td class="num">6</td><td class="num">84</td></tr>
+    <tr><td>Encyclopedias (6 sys)</td><td class="num">36</td><td class="num">36</td><td class="num">72</td><td class="num">30</td><td class="num">174</td></tr>
+    <tr><td>Media Services (2 sys)</td><td class="num">10</td><td class="num">10</td><td class="num">20</td><td class="num">6</td><td class="num">46</td></tr>
+    <tr><td>Educational (9 sys)</td><td class="num">54</td><td class="num">45</td><td class="num">90</td><td class="num">45</td><td class="num">234</td></tr>
+    <tr><td>Publishing (1 sys)</td><td class="num">6</td><td class="num">3</td><td class="num">6</td><td class="num">2</td><td class="num">17</td></tr>
+    <tr><td>Smart Services (2 sys)</td><td class="num">8</td><td class="num">8</td><td class="num">16</td><td class="num">16</td><td class="num">48</td></tr>
+    <tr class="subtotal"><td>Screens subtotal</td><td class="num">144</td><td class="num">118</td><td class="num">236</td><td class="num">105</td><td class="num">603</td></tr>
+  </tbody>
+</table>
+
+<h3>All Design Artifacts</h3>
+<div class="artifact-grid">
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat3)">603</div>
+    <div class="artifact-label">Design Screens<br>(CMS + Web + Responsive + Mobile)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat2)">~600</div>
+    <div class="artifact-label">Wireframes<br>(low-fi before each screen)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat1)">~120</div>
+    <div class="artifact-label">User Flows<br>(main + edge cases)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat4)">~20</div>
+    <div class="artifact-label">Interactive Prototypes</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat5)">~43</div>
+    <div class="artifact-label">Research Docs<br>(personas, competitive, IA, content)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat6)">~14</div>
+    <div class="artifact-label">Usability Tests<br>(scripts + reports)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--accent)">~60</div>
+    <div class="artifact-label">Design System Components<br>(shared library)</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>Total estimated design artifacts: ~1,460</strong>
+  This is before iteration. In practice, screens go through 2-3 revision rounds, adding 40-60% more work on top of these numbers.
+</div>
+
+<h3>Research & Artifacts Breakdown</h3>
+<table class="breakdown-table">
+  <thead>
+    <tr><th>Artifact Type</th><th class="num">Count</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Persona documents</td><td class="num">7</td><td>One per user role</td></tr>
+    <tr><td>Competitive analyses</td><td class="num">10</td><td>Grouped by domain (encyclopedias, LMS, etc.)</td></tr>
+    <tr><td>User research studies</td><td class="num">7</td><td>Interviews/surveys per role</td></tr>
+    <tr><td>Information architecture docs</td><td class="num">6</td><td>One per project (sitemaps, taxonomies)</td></tr>
+    <tr><td>Content strategy docs</td><td class="num">6</td><td>Content models, editorial workflows</td></tr>
+    <tr><td>Accessibility audits</td><td class="num">3</td><td>Per platform (CMS, web, mobile)</td></tr>
+    <tr><td>Design specifications</td><td class="num">26</td><td>Handoff docs per system</td></tr>
+    <tr><td>Usability test scripts</td><td class="num">7</td><td>Per role</td></tr>
+    <tr><td>Usability test reports</td><td class="num">7</td><td>Per role (5 sessions each)</td></tr>
+    <tr class="subtotal"><td>Research & docs subtotal</td><td class="num">79</td><td></td></tr>
+  </tbody>
+</table>
+
+<!-- Section 5: UX Timeline -->
+<h2><span class="num">5</span> The Time Question</h2>
+<p>We have <strong>2 UX designers</strong>. This platform shares our time with active projects:</p>
 
 <div class="project-list">
   <span class="project-chip active">IslamQA</span>
@@ -653,11 +761,8 @@
   <span class="project-chip proposed">Haramain Platform (26 systems, 7 roles, 3 platforms)</span>
 </div>
 
-<h3>What Each System Needs (UX-wise)</h3>
-<p>Each of the 26 systems requires at minimum: user research, main user flows, edge case handling, prototypes, final screen designs, and usability testing. This is not one product with 26 features — it's 26 separate design efforts, each with its own scenarios and complexity.</p>
-
 <h3>7 User Roles × 3 Platforms</h3>
-<p>The work is not just per-role — it multiplies across platforms. Each role needs its own experience on each platform it touches:</p>
+<p>Each role needs its own experience on each platform it touches:</p>
 
 <table>
   <thead>
@@ -674,126 +779,75 @@
   </tbody>
 </table>
 
-<h3>UX Deliverables per Role (across all platforms)</h3>
-
-<div class="legend">
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat1)"></span> Research</div>
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat2)"></span> User Flows</div>
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat3)"></span> Screens</div>
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat4)"></span> Usability Testing</div>
-</div>
-
-<div class="persona-chart">
-  <div class="persona-row">
-    <div class="persona-name">Admin</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat2)">5</div>
-      <div class="persona-seg" style="flex:10;background:var(--cat3)">10</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat4)">3</div>
-    </div>
-    <div class="persona-total">20</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Scholar</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat2)">6</div>
-      <div class="persona-seg" style="flex:14;background:var(--cat3)">14</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat4)">5</div>
-    </div>
-    <div class="persona-total">29</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Content Editor</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
-      <div class="persona-seg" style="flex:8;background:var(--cat3)">8</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
-    </div>
-    <div class="persona-total">16</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Info Architect</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat2)">3</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat3)">6</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
-    </div>
-    <div class="persona-total">13</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Reviewer</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
-      <div class="persona-seg" style="flex:8;background:var(--cat3)">8</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat4)">3</div>
-    </div>
-    <div class="persona-total">17</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Teacher</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:3;background:var(--cat1)">3</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat2)">6</div>
-      <div class="persona-seg" style="flex:12;background:var(--cat3)">12</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat4)">4</div>
-    </div>
-    <div class="persona-total">25</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name" style="font-weight:700">Student</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
-      <div class="persona-seg" style="flex:8;background:var(--cat2)">8</div>
-      <div class="persona-seg" style="flex:18;background:var(--cat3)">18</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat4)">6</div>
-    </div>
-    <div class="persona-total critical">36</div>
-  </div>
-</div>
-
-<h3>The Time Math</h3>
-<p>We have <strong>2 UX designers</strong>. This platform is not our only project — it shares time with IslamQA, Aalam, Mashaykh Websites, and others.</p>
+<h3>Human-First Approach</h3>
+<p>Traditional UX process — designers do all research, flows, wireframes, screens, and testing manually.</p>
 
 <div class="time-math">
   <div class="time-math-row">
-    <span class="label">Total UX deliverables (7 roles × 3 platforms)</span>
-    <span class="value">~156</span>
+    <span class="label">Total design artifacts (from Section 4)</span>
+    <span class="value">~1,460</span>
   </div>
   <div class="time-math-row">
     <span class="label">Realistic time allocation to this project</span>
     <span class="value">~30% per designer</span>
   </div>
   <div class="time-math-row">
-    <span class="label">Effective capacity</span>
+    <span class="label">Effective capacity (2 designers × 30%)</span>
     <span class="value">0.6 of a designer</span>
   </div>
   <div class="time-math-row">
-    <span class="label">At ~1 deliverable/week at 30%</span>
-    <span class="value">~260 weeks</span>
+    <span class="label">At ~5 artifacts/week at 30% capacity</span>
+    <span class="value">~292 weeks</span>
   </div>
   <div class="time-math-row">
     <span class="label">Add RTL + Islamic conventions overhead (+25%)</span>
-    <span class="value">~325 weeks</span>
+    <span class="value">~365 weeks</span>
   </div>
   <div class="time-math-row result">
-    <span class="label">UX layer alone</span>
-    <span class="value">~6.2 years</span>
+    <span class="label">Human-first: UX layer alone</span>
+    <span class="value">~7 years</span>
   </div>
 </div>
 
+<h3>AI-First Approach</h3>
+<p>AI tools (Figma AI, Claude, Copilot for design) accelerate wireframes, flows, and draft screens. But AI cannot replace user research, usability testing, content strategy for Islamic scholarly content, or the review cycles with stakeholders. Realistic AI acceleration: 30-40% on production artifacts, near 0% on research and testing.</p>
+
+<div class="time-math">
+  <div class="time-math-row">
+    <span class="label">Screens + wireframes + flows (~1,323 artifacts)</span>
+    <span class="value">AI saves ~35% → ~860 artifact-weeks</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">Research + testing + specs (~137 artifacts)</span>
+    <span class="value">No meaningful AI savings → ~137 artifact-weeks</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">Adjusted total at 30% capacity</span>
+    <span class="value">~200 weeks</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">Add RTL + Islamic conventions overhead (+25%)</span>
+    <span class="value">~250 weeks</span>
+  </div>
+  <div class="time-math-row result">
+    <span class="label">AI-first: UX layer alone</span>
+    <span class="value">~4.8 years</span>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>Even with AI-first: ~4.8 years. Without AI: ~7 years.</strong>
+  Both estimates are for UX design only — before any developer writes code on those designs. And this assumes the team allocates 30% of its time while continuing to deliver on IslamQA, Aalam, Mashaykh Websites, and other projects.
+</div>
+
 <div class="callout callout-warning">
-  <strong>Even scoping down to 2 roles (Scholar + Student) on Website only</strong>
-  At 30% capacity: ~80 weeks of UX work — over 1.5 years — while still delivering on IslamQA, Aalam, and Mashaykh Websites.
+  <strong>Scoped down to just Scholar + Student on Website only?</strong>
+  Human-first: ~1.5 years. AI-first: ~1 year. Still significant alongside active projects.
 </div>
 
 <h3>The Bottom Line</h3>
 <p>In principle, <strong>anything is doable</strong>. Nothing here is impossible. The question is: <strong>how much time will it take?</strong></p>
-<p>With the current scope (26 systems, 7 user roles, 3 platforms, each system with its own main scenarios, edge cases, flows, research, and prototypes) — and the design team splitting time with other active projects — <strong>we're looking at years for the design layer alone</strong>, before any developer writes a line of code on those designs.</p>
+<p>With the current scope (26 systems, 7 user roles, 3 platforms, ~1,460 design artifacts) — and the design team splitting time with other active projects — <strong>we're looking at years for the design layer alone</strong>, regardless of whether we use an AI-first or human-first approach.</p>
 <p>The vision is ambitious and worthwhile. But we need to be honest: either dedicate a full team, or prioritize a focused starting scope and build from there.</p>
 
 </div>
@@ -963,8 +1017,65 @@
   </tbody>
 </table>
 
-<h2><span class="num">٤</span> الواقع من منظور تجربة المستخدم</h2>
-<p>تخاطب المنصة <strong>٧ أدوار مستخدمين مختلفة</strong> عبر <strong>٣ منصات منفصلة</strong>. لكل دور أهدافه وأنماط تفاعله الخاصة — وكل منصة سطح تصميمي مستقل. وهذا المشروع ليس المشروع الوحيد — بل يتشارك وقت الفريق مع مشاريع قائمة فعليًا:</p>
+<h2><span class="num">٤</span> تقدير ملفات ومخرجات التصميم</h2>
+<p>كل نظام يحتاج شاشات عبر ٣ منصات (لوحة تحكم إدارية، صفحات موقع مع نسخ متجاوبة، تطبيق جوال). فوق ذلك: أبحاث، مسارات، نماذج أولية، اختبارات، ومنظومة تصميم مشتركة.</p>
+
+<h3>الشاشات لكل محور × منصة</h3>
+<table class="breakdown-table">
+  <thead>
+    <tr><th>المحور</th><th class="num">لوحة التحكم</th><th class="num">الموقع (سطح المكتب)</th><th class="num">متجاوب (تابلت+جوال)</th><th class="num">تطبيق الجوال</th><th class="num">المجموع</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>خدمات المحتوى (٦ أنظمة)</td><td class="num">٣٠</td><td class="num">١٦</td><td class="num">٣٢</td><td class="num">٦</td><td class="num">٨٤</td></tr>
+    <tr><td>الموسوعات (٦ أنظمة)</td><td class="num">٣٦</td><td class="num">٣٦</td><td class="num">٧٢</td><td class="num">٣٠</td><td class="num">١٧٤</td></tr>
+    <tr><td>الوسائط (نظامان)</td><td class="num">١٠</td><td class="num">١٠</td><td class="num">٢٠</td><td class="num">٦</td><td class="num">٤٦</td></tr>
+    <tr><td>التعليم والتدريب (٩ أنظمة)</td><td class="num">٥٤</td><td class="num">٤٥</td><td class="num">٩٠</td><td class="num">٤٥</td><td class="num">٢٣٤</td></tr>
+    <tr><td>النشر (نظام واحد)</td><td class="num">٦</td><td class="num">٣</td><td class="num">٦</td><td class="num">٢</td><td class="num">١٧</td></tr>
+    <tr><td>الخدمات الذكية (نظامان)</td><td class="num">٨</td><td class="num">٨</td><td class="num">١٦</td><td class="num">١٦</td><td class="num">٤٨</td></tr>
+    <tr class="subtotal"><td>مجموع الشاشات</td><td class="num">١٤٤</td><td class="num">١١٨</td><td class="num">٢٣٦</td><td class="num">١٠٥</td><td class="num">٦٠٣</td></tr>
+  </tbody>
+</table>
+
+<h3>جميع المخرجات التصميمية</h3>
+<div class="artifact-grid">
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat3)">٦٠٣</div>
+    <div class="artifact-label">شاشة تصميم<br>(لوحة تحكم + موقع + متجاوب + جوال)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat2)">~٦٠٠</div>
+    <div class="artifact-label">إطار سلكي<br>(نموذج أولي لكل شاشة)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat1)">~١٢٠</div>
+    <div class="artifact-label">مسار استخدام<br>(رئيسية + استثنائية)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat4)">~٢٠</div>
+    <div class="artifact-label">نموذج تفاعلي</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat5)">~٤٣</div>
+    <div class="artifact-label">وثيقة بحثية<br>(شخصيات، تحليل تنافسي، هيكلة)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--cat6)">~١٤</div>
+    <div class="artifact-label">اختبار قابلية استخدام<br>(سيناريوهات + تقارير)</div>
+  </div>
+  <div class="artifact-card">
+    <div class="artifact-num" style="color:var(--accent)">~٦٠</div>
+    <div class="artifact-label">مكوّن في منظومة التصميم<br>(مكتبة مشتركة)</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>إجمالي المخرجات التصميمية المقدّرة: ~١٬٤٦٠</strong>
+  هذا قبل جولات المراجعة. عمليًا، كل شاشة تمر بـ ٢–٣ جولات تعديل، مما يضيف ٤٠–٦٠٪ فوق هذه الأرقام.
+</div>
+
+<!-- Section 5: Timeline -->
+<h2><span class="num">٥</span> سؤال الوقت</h2>
+<p>لدينا <strong>مصممان اثنان</strong> لتجربة المستخدم. هذه المنصة تتشارك وقتنا مع مشاريع قائمة:</p>
 
 <div class="project-list">
   <span class="project-chip active">IslamQA</span>
@@ -974,147 +1085,93 @@
   <span class="project-chip proposed">منصة الحرمين (٢٦ نظامًا، ٧ أدوار، ٣ منصات)</span>
 </div>
 
-<h3>ماذا يحتاج كل نظام تصميميًا؟</h3>
-<p>كل نظام من الـ ٢٦ يحتاج على الأقل: بحث عن المستخدمين، مسارات استخدام رئيسية وحالات استثنائية، نماذج أولية، تصاميم شاشات، واختبارات قابلية استخدام. كل نظام مشروع تصميمي بحد ذاته.</p>
-
 <h3>٧ أدوار × ٣ منصات</h3>
-<p>العمل لا يُحسب لكل دور فحسب — بل يتضاعف عبر المنصات. كل دور يحتاج تجربته الخاصة على كل منصة يتعامل معها:</p>
+<p>كل دور يحتاج تجربته الخاصة على كل منصة يتعامل معها:</p>
 
 <table>
   <thead>
-    <tr><th>دور المستخدم</th><th>نظام الإدارة (CMS)</th><th>الموقع</th><th>تطبيق الجوال</th></tr>
+    <tr><th>دور المستخدم</th><th>لوحة التحكم</th><th>الموقع</th><th>تطبيق الجوال</th></tr>
   </thead>
   <tbody>
-    <tr><td><strong>المدير (Admin)</strong></td><td>أساسي</td><td>—</td><td>—</td></tr>
-    <tr><td><strong>العالِم (Scholar)</strong></td><td>—</td><td>أساسي</td><td>أساسي</td></tr>
+    <tr><td><strong>المدير</strong></td><td>أساسي</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>العالِم</strong></td><td>—</td><td>أساسي</td><td>أساسي</td></tr>
     <tr><td><strong>محرر المحتوى</strong></td><td>أساسي</td><td>ثانوي</td><td>—</td></tr>
     <tr><td><strong>مهندس المعلومات</strong></td><td>أساسي</td><td>—</td><td>—</td></tr>
-    <tr><td><strong>المراجع (Reviewer)</strong></td><td>أساسي</td><td>ثانوي</td><td>—</td></tr>
-    <tr><td><strong>المعلّم (Teacher)</strong></td><td>ثانوي</td><td>أساسي</td><td>أساسي</td></tr>
-    <tr><td><strong>الطالب (Student)</strong></td><td>—</td><td>أساسي</td><td>أساسي</td></tr>
+    <tr><td><strong>المراجع</strong></td><td>أساسي</td><td>ثانوي</td><td>—</td></tr>
+    <tr><td><strong>المعلّم</strong></td><td>ثانوي</td><td>أساسي</td><td>أساسي</td></tr>
+    <tr><td><strong>الطالب</strong></td><td>—</td><td>أساسي</td><td>أساسي</td></tr>
   </tbody>
 </table>
 
-<h3>المخرجات التصميمية لكل دور (عبر جميع المنصات)</h3>
-
-<div class="legend">
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat1)"></span> بحث ودراسة</div>
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat2)"></span> مسارات المستخدم</div>
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat3)"></span> شاشات وتصاميم</div>
-  <div class="legend-item"><span class="legend-dot" style="background:var(--cat4)"></span> اختبار وتقييم</div>
-</div>
-
-<div class="persona-chart">
-  <div class="persona-row">
-    <div class="persona-name">المدير</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat2)">٥</div>
-      <div class="persona-seg" style="flex:10;background:var(--cat3)">١٠</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat4)">٣</div>
-    </div>
-    <div class="persona-total">٢٠</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">العالِم</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat2)">٦</div>
-      <div class="persona-seg" style="flex:14;background:var(--cat3)">١٤</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat4)">٥</div>
-    </div>
-    <div class="persona-total">٢٩</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">محرر المحتوى</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
-      <div class="persona-seg" style="flex:8;background:var(--cat3)">٨</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
-    </div>
-    <div class="persona-total">١٦</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">مهندس المعلومات</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat2)">٣</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat3)">٦</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
-    </div>
-    <div class="persona-total">١٣</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">المراجع</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
-      <div class="persona-seg" style="flex:8;background:var(--cat3)">٨</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat4)">٣</div>
-    </div>
-    <div class="persona-total">١٧</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">المعلّم</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:3;background:var(--cat1)">٣</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat2)">٦</div>
-      <div class="persona-seg" style="flex:12;background:var(--cat3)">١٢</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat4)">٤</div>
-    </div>
-    <div class="persona-total">٢٥</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name" style="font-weight:700">الطالب</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
-      <div class="persona-seg" style="flex:8;background:var(--cat2)">٨</div>
-      <div class="persona-seg" style="flex:18;background:var(--cat3)">١٨</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat4)">٦</div>
-    </div>
-    <div class="persona-total critical">٣٦</div>
-  </div>
-</div>
-
-<h3>حسبة الوقت</h3>
-<p>لدينا <strong>مصممان اثنان</strong> لتجربة المستخدم. هذه المنصة ليست مشروعنا الوحيد — تتقاسم الوقت مع IslamQA وأعلام ومواقع المشائخ ومشاريع أخرى.</p>
+<h3>النهج التقليدي (Human-First)</h3>
+<p>العملية التصميمية التقليدية — المصممون ينفذون جميع الأبحاث والمسارات والإطارات والشاشات والاختبارات يدويًا.</p>
 
 <div class="time-math">
   <div class="time-math-row">
-    <span class="label">إجمالي المخرجات التصميمية (٧ أدوار × ٣ منصات)</span>
-    <span class="value">~١٥٦ مخرجًا</span>
+    <span class="label">إجمالي المخرجات التصميمية (من القسم ٤)</span>
+    <span class="value">~١٬٤٦٠</span>
   </div>
   <div class="time-math-row">
-    <span class="label">الوقت الذي يمكن تخصيصه واقعيًا</span>
+    <span class="label">الوقت المتاح واقعيًا لهذا المشروع</span>
     <span class="value">~٣٠٪ من وقت كل مصمم</span>
   </div>
   <div class="time-math-row">
-    <span class="label">الطاقة الفعلية</span>
+    <span class="label">الطاقة الفعلية (مصممان × ٣٠٪)</span>
     <span class="value">٠.٦ مصمم</span>
   </div>
   <div class="time-math-row">
-    <span class="label">بمعدل مخرج واحد أسبوعيًا عند ٣٠٪</span>
-    <span class="value">~٢٦٠ أسبوعًا</span>
+    <span class="label">بمعدل ~٥ مخرجات أسبوعيًا عند ٣٠٪</span>
+    <span class="value">~٢٩٢ أسبوعًا</span>
   </div>
   <div class="time-math-row">
     <span class="label">مع احتساب تعقيدات العربية واتجاه RTL (+٢٥٪)</span>
-    <span class="value">~٣٢٥ أسبوعًا</span>
+    <span class="value">~٣٦٥ أسبوعًا</span>
   </div>
   <div class="time-math-row result">
-    <span class="label">التصميم وحده بدون البرمجة</span>
-    <span class="value">~٦.٢ سنة</span>
+    <span class="label">النهج التقليدي: التصميم وحده</span>
+    <span class="value">~٧ سنوات</span>
   </div>
 </div>
 
+<h3>النهج بالذكاء الاصطناعي (AI-First)</h3>
+<p>أدوات الذكاء الاصطناعي (Figma AI، Claude، أدوات التصميم التوليدية) تسرّع الإطارات السلكية والمسارات ومسودات الشاشات. لكنها لا تستطيع أن تحل محل أبحاث المستخدمين، واختبارات قابلية الاستخدام، واستراتيجية المحتوى للمحتوى العلمي الشرعي، أو جولات المراجعة مع أصحاب القرار. التسريع الواقعي: ٣٠–٤٠٪ على المخرجات الإنتاجية، قريب من الصفر على الأبحاث والاختبارات.</p>
+
+<div class="time-math">
+  <div class="time-math-row">
+    <span class="label">شاشات + إطارات + مسارات (~١٬٣٢٣ مخرجًا)</span>
+    <span class="value">الذكاء الاصطناعي يوفر ~٣٥٪</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">أبحاث + اختبارات + مواصفات (~١٣٧ مخرجًا)</span>
+    <span class="value">لا وفر يُذكر</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">المجموع المعدّل عند ٣٠٪ من الطاقة</span>
+    <span class="value">~٢٠٠ أسبوع</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">مع احتساب تعقيدات العربية واتجاه RTL (+٢٥٪)</span>
+    <span class="value">~٢٥٠ أسبوعًا</span>
+  </div>
+  <div class="time-math-row result">
+    <span class="label">بالذكاء الاصطناعي: التصميم وحده</span>
+    <span class="value">~٤.٨ سنة</span>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>حتى بالذكاء الاصطناعي: ~٤.٨ سنة. بدونه: ~٧ سنوات.</strong>
+  كلا التقديرين للتصميم فقط — قبل أن يكتب أي مطوّر سطر كود. وهذا بافتراض تخصيص ٣٠٪ من الوقت مع استمرار العمل على IslamQA وأعلام ومواقع المشائخ ومشاريع أخرى.
+</div>
+
 <div class="callout callout-warning">
-  <strong>حتى لو اقتصرنا على دورين فقط (العالِم + الطالب) على الموقع فقط</strong>
-  بنسبة ٣٠٪ من وقتنا: نحو ٨٠ أسبوعًا من العمل التصميمي — أي أكثر من سنة ونصف — مع استمرار التسليم على IslamQA وأعلام ومواقع المشائخ بالتوازي.
+  <strong>لو اقتصرنا على العالِم والطالب على الموقع فقط؟</strong>
+  بالنهج التقليدي: نحو سنة ونصف. بالذكاء الاصطناعي: نحو سنة. وهذا مع استمرار المشاريع الأخرى.
 </div>
 
 <h3>الخلاصة</h3>
 <p>من حيث المبدأ، <strong>أي شيء يمكن تنفيذه</strong>. لا يوجد ما هو مستحيل. لكن السؤال الجوهري هو: <strong>خلال كم من الوقت؟</strong></p>
-<p>بالنطاق الحالي (٢٦ نظامًا، ٧ أدوار مستخدمين، ٣ منصات، كل نظام له سيناريوهاته الرئيسية وحالاته الاستثنائية ومساراته وأبحاثه ونماذجه الأولية) — والفريق التصميمي يعمل على مشاريع أخرى بالتوازي — <strong>فإننا نتحدث عن سنوات للتصميم وحده</strong>، قبل أن يبدأ أي مطوّر بكتابة سطر كود على هذه التصاميم.</p>
+<p>بالنطاق الحالي (٢٦ نظامًا، ٧ أدوار مستخدمين، ٣ منصات، ~١٬٤٦٠ مخرجًا تصميميًا) — والفريق التصميمي يعمل على مشاريع أخرى بالتوازي — <strong>فإننا نتحدث عن سنوات للتصميم وحده</strong>، سواء بالنهج التقليدي أو بالذكاء الاصطناعي.</p>
 <p>الرؤية طموحة وجديرة بالاهتمام. لكن يجب أن نكون صريحين: إما أن نخصّص فريقًا متفرغًا لهذا المشروع، أو نرتّب الأولويات ونبدأ بمرحلة محدودة النطاق ونبني عليها تدريجيًا.</p>
 
 </div>
