@@ -485,8 +485,8 @@
     <div class="stat-label">Proposed Systems</div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" style="color:var(--cat2)">6</div>
-    <div class="stat-label">Actual Projects</div>
+    <div class="stat-number" style="color:var(--cat2)">7 × 3</div>
+    <div class="stat-label">User Roles × Platforms</div>
   </div>
   <div class="stat-card">
     <div class="stat-number" style="color:var(--danger)">11-15x</div>
@@ -643,20 +643,38 @@
 
 <!-- Section 4: UX Reality -->
 <h2><span class="num">4</span> The UX Reality</h2>
-<p>The platform serves <strong>6 distinct user personas</strong>. Each has different goals, mental models, and interaction patterns. This project shares our time with active projects:</p>
+<p>The platform serves <strong>7 distinct user roles</strong> across <strong>3 separate platforms</strong>. Each role has different goals and interaction patterns — and each platform is a separate design surface. This project shares our time with active projects:</p>
 
 <div class="project-list">
   <span class="project-chip active">IslamQA</span>
   <span class="project-chip active">Aalam</span>
   <span class="project-chip active">Mashaykh Websites</span>
   <span class="project-chip active">Other projects</span>
-  <span class="project-chip proposed">Haramain Platform (26 systems, 6 personas)</span>
+  <span class="project-chip proposed">Haramain Platform (26 systems, 7 roles, 3 platforms)</span>
 </div>
 
 <h3>What Each System Needs (UX-wise)</h3>
 <p>Each of the 26 systems requires at minimum: user research, main user flows, edge case handling, prototypes, final screen designs, and usability testing. This is not one product with 26 features — it's 26 separate design efforts, each with its own scenarios and complexity.</p>
 
-<h3>UX Deliverables per Persona</h3>
+<h3>7 User Roles × 3 Platforms</h3>
+<p>The work is not just per-role — it multiplies across platforms. Each role needs its own experience on each platform it touches:</p>
+
+<table>
+  <thead>
+    <tr><th>User Role</th><th>CMS</th><th>Website</th><th>Mobile App</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Admin</strong></td><td>Primary</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Scholar</strong></td><td>—</td><td>Primary</td><td>Primary</td></tr>
+    <tr><td><strong>Content Editor</strong></td><td>Primary</td><td>Secondary</td><td>—</td></tr>
+    <tr><td><strong>Information Architect</strong></td><td>Primary</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>Reviewer</strong></td><td>Primary</td><td>Secondary</td><td>—</td></tr>
+    <tr><td><strong>Teacher</strong></td><td>Secondary</td><td>Primary</td><td>Primary</td></tr>
+    <tr><td><strong>Student</strong></td><td>—</td><td>Primary</td><td>Primary</td></tr>
+  </tbody>
+</table>
+
+<h3>UX Deliverables per Role (across all platforms)</h3>
 
 <div class="legend">
   <div class="legend-item"><span class="legend-dot" style="background:var(--cat1)"></span> Research</div>
@@ -667,7 +685,47 @@
 
 <div class="persona-chart">
   <div class="persona-row">
-    <div class="persona-name">Casual Visitor</div>
+    <div class="persona-name">Admin</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat2)">5</div>
+      <div class="persona-seg" style="flex:10;background:var(--cat3)">10</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat4)">3</div>
+    </div>
+    <div class="persona-total">20</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Scholar</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat2)">6</div>
+      <div class="persona-seg" style="flex:14;background:var(--cat3)">14</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat4)">5</div>
+    </div>
+    <div class="persona-total">29</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Content Editor</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
+      <div class="persona-seg" style="flex:8;background:var(--cat3)">8</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
+    </div>
+    <div class="persona-total">16</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Info Architect</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat2)">3</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat3)">6</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
+    </div>
+    <div class="persona-total">13</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Reviewer</div>
     <div class="persona-bar-track">
       <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
       <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
@@ -677,54 +735,24 @@
     <div class="persona-total">17</div>
   </div>
   <div class="persona-row">
-    <div class="persona-name" style="font-weight:700">Student (طالب العلم)</div>
+    <div class="persona-name">Teacher</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:3;background:var(--cat1)">3</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat2)">6</div>
+      <div class="persona-seg" style="flex:12;background:var(--cat3)">12</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat4)">4</div>
+    </div>
+    <div class="persona-total">25</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name" style="font-weight:700">Student</div>
     <div class="persona-bar-track">
       <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
       <div class="persona-seg" style="flex:8;background:var(--cat2)">8</div>
-      <div class="persona-seg" style="flex:16;background:var(--cat3)">16</div>
+      <div class="persona-seg" style="flex:18;background:var(--cat3)">18</div>
       <div class="persona-seg" style="flex:6;background:var(--cat4)">6</div>
     </div>
-    <div class="persona-total critical">34</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Researcher / Scholar</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat2)">6</div>
-      <div class="persona-seg" style="flex:12;background:var(--cat3)">12</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat4)">5</div>
-    </div>
-    <div class="persona-total">27</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Content Editor</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:1;background:var(--cat1)">1</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat2)">3</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat3)">6</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
-    </div>
-    <div class="persona-total">12</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Translator</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:3;background:var(--cat1)">3</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat3)">6</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat4)">3</div>
-    </div>
-    <div class="persona-total">16</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">Content Producer</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat2)">3</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat3)">5</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
-    </div>
-    <div class="persona-total">12</div>
+    <div class="persona-total critical">36</div>
   </div>
 </div>
 
@@ -733,8 +761,8 @@
 
 <div class="time-math">
   <div class="time-math-row">
-    <span class="label">Total UX deliverables</span>
-    <span class="value">~106</span>
+    <span class="label">Total UX deliverables (7 roles × 3 platforms)</span>
+    <span class="value">~156</span>
   </div>
   <div class="time-math-row">
     <span class="label">Realistic time allocation to this project</span>
@@ -746,26 +774,26 @@
   </div>
   <div class="time-math-row">
     <span class="label">At ~1 deliverable/week at 30%</span>
-    <span class="value">~177 weeks</span>
+    <span class="value">~260 weeks</span>
   </div>
   <div class="time-math-row">
     <span class="label">Add RTL + Islamic conventions overhead (+25%)</span>
-    <span class="value">~221 weeks</span>
+    <span class="value">~325 weeks</span>
   </div>
   <div class="time-math-row result">
     <span class="label">UX layer alone</span>
-    <span class="value">~4.2 years</span>
+    <span class="value">~6.2 years</span>
   </div>
 </div>
 
 <div class="callout callout-warning">
-  <strong>Even scoping down to 2 personas (Visitor + Student)</strong>
-  At 30% capacity: ~60 weeks of UX work — over a year — while still delivering on IslamQA, Aalam, and Mashaykh Websites.
+  <strong>Even scoping down to 2 roles (Scholar + Student) on Website only</strong>
+  At 30% capacity: ~80 weeks of UX work — over 1.5 years — while still delivering on IslamQA, Aalam, and Mashaykh Websites.
 </div>
 
 <h3>The Bottom Line</h3>
 <p>In principle, <strong>anything is doable</strong>. Nothing here is impossible. The question is: <strong>how much time will it take?</strong></p>
-<p>With the current scope (26 systems, 6 user personas, each system with its own scenarios, flows, research, and prototypes) — and the design team splitting time with other active projects — <strong>we're looking at years for the design layer alone</strong>, before any developer writes a line of code on those designs.</p>
+<p>With the current scope (26 systems, 7 user roles, 3 platforms, each system with its own main scenarios, edge cases, flows, research, and prototypes) — and the design team splitting time with other active projects — <strong>we're looking at years for the design layer alone</strong>, before any developer writes a line of code on those designs.</p>
 <p>The vision is ambitious and worthwhile. But we need to be honest: either dedicate a full team, or prioritize a focused starting scope and build from there.</p>
 
 </div>
@@ -782,8 +810,8 @@
     <div class="stat-label">نظام مقترح</div>
   </div>
   <div class="stat-card">
-    <div class="stat-number" style="color:var(--cat2)">٦</div>
-    <div class="stat-label">مشاريع مستقلة تقنيًا</div>
+    <div class="stat-number" style="color:var(--cat2)">٧ × ٣</div>
+    <div class="stat-label">أدوار مستخدمين × منصات</div>
   </div>
   <div class="stat-card">
     <div class="stat-number" style="color:var(--danger)">١١–١٥ ضعف</div>
@@ -936,18 +964,38 @@
 </table>
 
 <h2><span class="num">٤</span> الواقع من منظور تجربة المستخدم</h2>
-<p>تخاطب المنصة <strong>٦ شرائح مستخدمين مختلفة</strong>، لكلٍّ منها أهداف وأنماط تفاعل تختلف عن غيرها. وهذا المشروع ليس المشروع الوحيد — بل يتشارك وقت الفريق مع مشاريع قائمة فعليًا:</p>
+<p>تخاطب المنصة <strong>٧ أدوار مستخدمين مختلفة</strong> عبر <strong>٣ منصات منفصلة</strong>. لكل دور أهدافه وأنماط تفاعله الخاصة — وكل منصة سطح تصميمي مستقل. وهذا المشروع ليس المشروع الوحيد — بل يتشارك وقت الفريق مع مشاريع قائمة فعليًا:</p>
 
 <div class="project-list">
   <span class="project-chip active">IslamQA</span>
   <span class="project-chip active">أعلام</span>
   <span class="project-chip active">مواقع المشائخ</span>
   <span class="project-chip active">مشاريع أخرى</span>
-  <span class="project-chip proposed">منصة الحرمين (٢٦ نظام، ٦ شرائح)</span>
+  <span class="project-chip proposed">منصة الحرمين (٢٦ نظامًا، ٧ أدوار، ٣ منصات)</span>
 </div>
 
 <h3>ماذا يحتاج كل نظام تصميميًا؟</h3>
-<p>كل نظام من الـ ٢٦ يحتاج على الأقل: بحث عن المستخدمين، مسارات استخدام رئيسية وفرعية، حالات استثنائية (edge cases)، نماذج أولية (prototypes)، تصاميم شاشات، واختبارات قابلية استخدام. هذا ليس شغل صفحة وحدة — كل نظام عالم لحاله.</p>
+<p>كل نظام من الـ ٢٦ يحتاج على الأقل: بحث عن المستخدمين، مسارات استخدام رئيسية وحالات استثنائية، نماذج أولية، تصاميم شاشات، واختبارات قابلية استخدام. كل نظام مشروع تصميمي بحد ذاته.</p>
+
+<h3>٧ أدوار × ٣ منصات</h3>
+<p>العمل لا يُحسب لكل دور فحسب — بل يتضاعف عبر المنصات. كل دور يحتاج تجربته الخاصة على كل منصة يتعامل معها:</p>
+
+<table>
+  <thead>
+    <tr><th>دور المستخدم</th><th>نظام الإدارة (CMS)</th><th>الموقع</th><th>تطبيق الجوال</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>المدير (Admin)</strong></td><td>أساسي</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>العالِم (Scholar)</strong></td><td>—</td><td>أساسي</td><td>أساسي</td></tr>
+    <tr><td><strong>محرر المحتوى</strong></td><td>أساسي</td><td>ثانوي</td><td>—</td></tr>
+    <tr><td><strong>مهندس المعلومات</strong></td><td>أساسي</td><td>—</td><td>—</td></tr>
+    <tr><td><strong>المراجع (Reviewer)</strong></td><td>أساسي</td><td>ثانوي</td><td>—</td></tr>
+    <tr><td><strong>المعلّم (Teacher)</strong></td><td>ثانوي</td><td>أساسي</td><td>أساسي</td></tr>
+    <tr><td><strong>الطالب (Student)</strong></td><td>—</td><td>أساسي</td><td>أساسي</td></tr>
+  </tbody>
+</table>
+
+<h3>المخرجات التصميمية لكل دور (عبر جميع المنصات)</h3>
 
 <div class="legend">
   <div class="legend-item"><span class="legend-dot" style="background:var(--cat1)"></span> بحث ودراسة</div>
@@ -958,7 +1006,47 @@
 
 <div class="persona-chart">
   <div class="persona-row">
-    <div class="persona-name">الزائر العادي</div>
+    <div class="persona-name">المدير</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat2)">٥</div>
+      <div class="persona-seg" style="flex:10;background:var(--cat3)">١٠</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat4)">٣</div>
+    </div>
+    <div class="persona-total">٢٠</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">العالِم</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat2)">٦</div>
+      <div class="persona-seg" style="flex:14;background:var(--cat3)">١٤</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat4)">٥</div>
+    </div>
+    <div class="persona-total">٢٩</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">محرر المحتوى</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
+      <div class="persona-seg" style="flex:8;background:var(--cat3)">٨</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
+    </div>
+    <div class="persona-total">١٦</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">مهندس المعلومات</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat2)">٣</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat3)">٦</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
+    </div>
+    <div class="persona-total">١٣</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">المراجع</div>
     <div class="persona-bar-track">
       <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
       <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
@@ -968,54 +1056,24 @@
     <div class="persona-total">١٧</div>
   </div>
   <div class="persona-row">
-    <div class="persona-name" style="font-weight:700">طالب العلم</div>
+    <div class="persona-name">المعلّم</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:3;background:var(--cat1)">٣</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat2)">٦</div>
+      <div class="persona-seg" style="flex:12;background:var(--cat3)">١٢</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat4)">٤</div>
+    </div>
+    <div class="persona-total">٢٥</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name" style="font-weight:700">الطالب</div>
     <div class="persona-bar-track">
       <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
       <div class="persona-seg" style="flex:8;background:var(--cat2)">٨</div>
-      <div class="persona-seg" style="flex:16;background:var(--cat3)">١٦</div>
+      <div class="persona-seg" style="flex:18;background:var(--cat3)">١٨</div>
       <div class="persona-seg" style="flex:6;background:var(--cat4)">٦</div>
     </div>
-    <div class="persona-total critical">٣٤</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">الباحث أو العالم</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat2)">٦</div>
-      <div class="persona-seg" style="flex:12;background:var(--cat3)">١٢</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat4)">٥</div>
-    </div>
-    <div class="persona-total">٢٧</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">محرر المحتوى</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:1;background:var(--cat1)">١</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat2)">٣</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat3)">٦</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
-    </div>
-    <div class="persona-total">١٢</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">المترجم</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:3;background:var(--cat1)">٣</div>
-      <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
-      <div class="persona-seg" style="flex:6;background:var(--cat3)">٦</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat4)">٣</div>
-    </div>
-    <div class="persona-total">١٦</div>
-  </div>
-  <div class="persona-row">
-    <div class="persona-name">منتج المحتوى</div>
-    <div class="persona-bar-track">
-      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
-      <div class="persona-seg" style="flex:3;background:var(--cat2)">٣</div>
-      <div class="persona-seg" style="flex:5;background:var(--cat3)">٥</div>
-      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
-    </div>
-    <div class="persona-total">١٢</div>
+    <div class="persona-total critical">٣٦</div>
   </div>
 </div>
 
@@ -1024,8 +1082,8 @@
 
 <div class="time-math">
   <div class="time-math-row">
-    <span class="label">إجمالي المخرجات التصميمية المطلوبة</span>
-    <span class="value">~١٠٦ مخرج</span>
+    <span class="label">إجمالي المخرجات التصميمية (٧ أدوار × ٣ منصات)</span>
+    <span class="value">~١٥٦ مخرجًا</span>
   </div>
   <div class="time-math-row">
     <span class="label">الوقت الذي يمكن تخصيصه واقعيًا</span>
@@ -1036,27 +1094,27 @@
     <span class="value">٠.٦ مصمم</span>
   </div>
   <div class="time-math-row">
-    <span class="label">بمعدل مخرج واحد بالأسبوع عند ٣٠٪</span>
-    <span class="value">~١٧٧ أسبوع</span>
+    <span class="label">بمعدل مخرج واحد أسبوعيًا عند ٣٠٪</span>
+    <span class="value">~٢٦٠ أسبوعًا</span>
   </div>
   <div class="time-math-row">
     <span class="label">مع احتساب تعقيدات العربية واتجاه RTL (+٢٥٪)</span>
-    <span class="value">~٢٢١ أسبوع</span>
+    <span class="value">~٣٢٥ أسبوعًا</span>
   </div>
   <div class="time-math-row result">
     <span class="label">التصميم وحده بدون البرمجة</span>
-    <span class="value">~٤.٢ سنة</span>
+    <span class="value">~٦.٢ سنة</span>
   </div>
 </div>
 
 <div class="callout callout-warning">
-  <strong>حتى لو قلّصنا لشريحتين فقط (الزائر + طالب العلم)</strong>
-  بنسبة ٣٠٪ من وقتنا: نحو ٦٠ أسبوعًا من العمل التصميمي — أي أكثر من سنة — مع استمرار التسليم على IslamQA وأعلام ومواقع المشائخ بالتوازي.
+  <strong>حتى لو اقتصرنا على دورين فقط (العالِم + الطالب) على الموقع فقط</strong>
+  بنسبة ٣٠٪ من وقتنا: نحو ٨٠ أسبوعًا من العمل التصميمي — أي أكثر من سنة ونصف — مع استمرار التسليم على IslamQA وأعلام ومواقع المشائخ بالتوازي.
 </div>
 
 <h3>الخلاصة</h3>
 <p>من حيث المبدأ، <strong>أي شيء يمكن تنفيذه</strong>. لا يوجد ما هو مستحيل. لكن السؤال الجوهري هو: <strong>خلال كم من الوقت؟</strong></p>
-<p>بالنطاق الحالي (٢٦ نظامًا، ٦ شرائح مستخدمين، كل نظام له سيناريوهاته ومساراته وأبحاثه ونماذجه الأولية) — والفريق التصميمي يعمل على مشاريع أخرى بالتوازي — <strong>فإننا نتحدث عن سنوات للتصميم وحده</strong>، قبل أن يبدأ أي مطوّر بكتابة سطر كود على هذه التصاميم.</p>
+<p>بالنطاق الحالي (٢٦ نظامًا، ٧ أدوار مستخدمين، ٣ منصات، كل نظام له سيناريوهاته الرئيسية وحالاته الاستثنائية ومساراته وأبحاثه ونماذجه الأولية) — والفريق التصميمي يعمل على مشاريع أخرى بالتوازي — <strong>فإننا نتحدث عن سنوات للتصميم وحده</strong>، قبل أن يبدأ أي مطوّر بكتابة سطر كود على هذه التصاميم.</p>
 <p>الرؤية طموحة وجديرة بالاهتمام. لكن يجب أن نكون صريحين: إما أن نخصّص فريقًا متفرغًا لهذا المشروع، أو نرتّب الأولويات ونبدأ بمرحلة محدودة النطاق ونبني عليها تدريجيًا.</p>
 
 </div>
