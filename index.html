@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scope & UX Feasibility Concerns — Haramain Platform</title>
+<style>
+  :root {
+    --bg: #fff;
+    --surface: #f8f9fa;
+    --border: #e2e8f0;
+    --ink: #1a202c;
+    --muted: #64748b;
+    --accent: #0f766e;
+    --accent-light: #ccfbf1;
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+    --warning: #d97706;
+    --warning-light: #fffbeb;
+    --cat1: #0f766e;
+    --cat2: #2563eb;
+    --cat3: #9333ea;
+    --cat4: #ea580c;
+    --cat5: #be185d;
+    --cat6: #854d0e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  [dir="rtl"] body {
+    font-family: 'SF Arabic', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .lang-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  [dir="rtl"] .lang-toggle { right: auto; left: 1rem; }
+
+  .lang-toggle button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .lang-toggle button.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1rem;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  p { margin-bottom: 1rem; }
+
+  .callout {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+  }
+
+  .callout-danger {
+    background: var(--danger-light);
+    border-left: 4px solid var(--danger);
+  }
+
+  [dir="rtl"] .callout-danger {
+    border-left: none;
+    border-right: 4px solid var(--danger);
+  }
+
+  .callout-warning {
+    background: var(--warning-light);
+    border-left: 4px solid var(--warning);
+  }
+
+  [dir="rtl"] .callout-warning {
+    border-left: none;
+    border-right: 4px solid var(--warning);
+  }
+
+  .callout strong { display: block; margin-bottom: 0.25rem; }
+
+  /* Systems Grid */
+  .systems-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.25rem 0;
+  }
+
+  .system-group {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+  }
+
+  .system-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .system-group-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .system-group-count {
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 0.15rem 0.6rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .system-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .system-tag {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--ink);
+  }
+
+  /* Scale Chart */
+  .scale-chart {
+    margin: 1.5rem 0;
+  }
+
+  .scale-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    gap: 0.75rem;
+  }
+
+  .scale-label {
+    width: 200px;
+    text-align: right;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  [dir="rtl"] .scale-label { text-align: left; }
+
+  .scale-bar-container {
+    flex: 1;
+    height: 32px;
+    background: var(--surface);
+    border-radius: 6px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .scale-bar {
+    height: 100%;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    transition: width 0.6s ease;
+    position: relative;
+  }
+
+  .scale-bar .whisker {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 1px;
+  }
+
+  .scale-bar .whisker-cap {
+    position: absolute;
+    top: 25%;
+    width: 2px;
+    height: 50%;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .scale-value {
+    width: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* Comparison Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--surface);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.65rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  [dir="rtl"] th { text-align: right; }
+
+  td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  .highlight-row { background: var(--danger-light); }
+  .highlight-row td { font-weight: 600; }
+
+  /* UX Personas Chart */
+  .persona-chart {
+    margin: 1.5rem 0;
+  }
+
+  .persona-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .persona-name {
+    width: 160px;
+    text-align: right;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+
+  [dir="rtl"] .persona-name { text-align: left; }
+
+  .persona-bar-track {
+    flex: 1;
+    height: 26px;
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    gap: 1px;
+  }
+
+  .persona-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #fff;
+    font-weight: 600;
+    min-width: 18px;
+  }
+
+  .persona-total {
+    width: 40px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .persona-total.critical { color: var(--danger); }
+
+  .legend {
+    display: flex;
+    gap: 1rem;
+    margin: 0.75rem 0;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  /* Timeline calc */
+  .time-math {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin: 1.25rem 0;
+    border: 1px solid var(--border);
+  }
+
+  .time-math-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    font-size: 0.9rem;
+  }
+
+  .time-math-row:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .time-math-row .label { color: var(--muted); }
+  .time-math-row .value { font-weight: 700; }
+  .time-math-row.result { font-size: 1rem; }
+  .time-math-row.result .value { color: var(--danger); }
+
+  /* Active Projects */
+  .project-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.75rem 0;
+  }
+
+  .project-chip {
+    padding: 0.35rem 0.85rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .project-chip.active {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .project-chip.proposed {
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+  }
+
+  .big-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .big-number-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 640px) {
+    .scale-label, .persona-name { width: 120px; font-size: 0.75rem; }
+    .stats-row { grid-template-columns: 1fr; }
+    h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-ar" onclick="setLang('ar')">AR</button>
+</div>
+
+<!-- ============ ENGLISH ============ -->
+<div id="content-en">
+
+<h1>Scope & UX Feasibility Concerns</h1>
+<p class="subtitle">Technical observations on the proposed strategic roadmap for the Haramain Knowledge Platform (خارطة طريق استراتيجية لتطوير منصة علمية رائدة). Focused on two concerns: the sheer size of what is proposed, and whether UX capacity matches scope.</p>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--accent)">26</div>
+    <div class="stat-label">Proposed Systems</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--cat2)">6</div>
+    <div class="stat-label">Actual Projects</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--danger)">11-15x</div>
+    <div class="stat-label">Scale vs Existing CMS</div>
+  </div>
+</div>
+
+<!-- Section 1: The 26 Systems -->
+<h2><span class="num">1</span> The 26 Systems</h2>
+<p>The roadmap proposes 26 distinct systems across 6 development axes. When reorganized by technical dependency, these form 6 separate projects. Here is every system:</p>
+
+<div class="callout callout-warning">
+  <strong>Each system = its own design project</strong>
+  Every single system needs its own user research, main flows, edge cases, prototypes, screen designs, and usability testing. Designing 26 systems is not like designing 26 pages — each one is a product in itself.
+</div>
+
+<div class="systems-grid">
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">Content Services (Axis 1)</span>
+      <span class="system-group-count">6 systems</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">Text Services (OCR, transcription)</span>
+      <span class="system-tag">Unified Metadata System</span>
+      <span class="system-tag">Knowledge Graph</span>
+      <span class="system-tag">Sharia Terminology Dictionary</span>
+      <span class="system-tag">Advanced Indexing System</span>
+      <span class="system-tag">Automated Enrichment</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">Encyclopedias (Axis 2)</span>
+      <span class="system-group-count">6 systems</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">Tafsir Encyclopedia</span>
+      <span class="system-tag">Hadith Encyclopedia</span>
+      <span class="system-tag">Fiqh Issues Compendium</span>
+      <span class="system-tag">Scientific Texts (Mutun)</span>
+      <span class="system-tag">Sharia Translator Assistant</span>
+      <span class="system-tag">Additional Encyclopedias (4 sub-encyclopedias)</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">Media Services (Axis 3)</span>
+      <span class="system-group-count">2 systems</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">Interactive Mind Maps</span>
+      <span class="system-tag">Scientific Infographics</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">Educational Services (Axis 4)</span>
+      <span class="system-group-count">9 systems</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">Student of Knowledge Program (5 levels)</span>
+      <span class="system-tag">Dynamic E-Learning Portals</span>
+      <span class="system-tag">Automated Summarization</span>
+      <span class="system-tag">Quotes Library</span>
+      <span class="system-tag">User Notes & Study System</span>
+      <span class="system-tag">Training & Comprehension Testing</span>
+      <span class="system-tag">Gamification (badges, points, competitions)</span>
+      <span class="system-tag">Automatic Question Generation (AQG)</span>
+      <span class="system-tag">Interactive Exercises Bank</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">Publishing Services (Axis 5)</span>
+      <span class="system-group-count">1 system</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">Audio-to-Book Conversion</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">Smart Services (Axis 6)</span>
+      <span class="system-group-count">2 systems</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">Interactive Visitor Assistant (AI Chatbot)</span>
+      <span class="system-tag">Mobile App (offline, audio, voice search)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Section 2: Scale -->
+<h2><span class="num">2</span> Scale vs the CMS</h2>
+<p>The existing CMS prototype (mushkat) is a WordPress admin with 30+ post types. WordPress handles ~70% of its complexity. Everything else is custom engineering from scratch.</p>
+
+<div class="scale-chart">
+  <div class="scale-row">
+    <div class="scale-label">CMS (mushkat)</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:8%;background:var(--cat1)">1x</div></div>
+    <div class="scale-value" style="color:var(--cat1)">1x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">Public Frontend</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:20%;background:var(--cat2)"></div></div>
+    <div class="scale-value">2-3x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">Processing Pipeline</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:14%;background:var(--cat3)"></div></div>
+    <div class="scale-value">1.5-2x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">AI Services</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:20%;background:var(--cat4)"></div></div>
+    <div class="scale-value">2-3x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">E-Learning (LMS)</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:28%;background:var(--danger)"></div></div>
+    <div class="scale-value" style="color:var(--danger)">3-4x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">Mobile App</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:14%;background:var(--cat5)"></div></div>
+    <div class="scale-value">1.5-2x</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>Combined scope: 11-15x the CMS</strong>
+  The CMS is the easiest piece — WordPress carries it. Every other project is custom engineering with no equivalent platform leverage.
+</div>
+
+<!-- Section 3: Competition -->
+<h2><span class="num">3</span> What This Competes With</h2>
+<p>The roadmap aims to replicate and exceed the core features of multiple established platforms, each built by dedicated teams over many years:</p>
+
+<table>
+  <thead>
+    <tr><th>Proposed Feature</th><th>Equivalent Platform</th><th>That Platform's Maturity</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tafsir Encyclopedia + audio</td><td>Quran.com</td><td>15+ years</td></tr>
+    <tr><td>Hadith + fiqh encyclopedia</td><td>Dorar.net</td><td>10+ years</td></tr>
+    <tr><td>10,000+ book library + search</td><td>Shamela.ws</td><td>20+ years</td></tr>
+    <tr><td>Courses + learning paths</td><td>Majaalis.online</td><td>Several years</td></tr>
+    <tr><td>Interactive mind maps</td><td>MindMeister</td><td>15+ years</td></tr>
+    <tr><td>AI summarization + Q&A</td><td>Google NotebookLM</td><td>Google AI org</td></tr>
+    <tr class="highlight-row"><td colspan="3">+ Knowledge Graph, AI Sharia Translator, AQG, Gamification — features none of the above offer</td></tr>
+  </tbody>
+</table>
+
+<!-- Section 4: UX Reality -->
+<h2><span class="num">4</span> The UX Reality</h2>
+<p>The platform serves <strong>6 distinct user personas</strong>. Each has different goals, mental models, and interaction patterns. This project shares our time with active projects:</p>
+
+<div class="project-list">
+  <span class="project-chip active">IslamQA</span>
+  <span class="project-chip active">Aalam</span>
+  <span class="project-chip active">Mashaykh</span>
+  <span class="project-chip active">Other projects</span>
+  <span class="project-chip proposed">Haramain Platform (26 systems, 6 personas)</span>
+</div>
+
+<h3>What Each System Needs (UX-wise)</h3>
+<p>Each of the 26 systems requires at minimum: user research, main user flows, edge case handling, prototypes, final screen designs, and usability testing. This is not one product with 26 features — it's 26 separate design efforts, each with its own scenarios and complexity.</p>
+
+<h3>UX Deliverables per Persona</h3>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat1)"></span> Research</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat2)"></span> User Flows</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat3)"></span> Screens</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat4)"></span> Usability Testing</div>
+</div>
+
+<div class="persona-chart">
+  <div class="persona-row">
+    <div class="persona-name">Casual Visitor</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
+      <div class="persona-seg" style="flex:8;background:var(--cat3)">8</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat4)">3</div>
+    </div>
+    <div class="persona-total">17</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name" style="font-weight:700">Student (طالب العلم)</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
+      <div class="persona-seg" style="flex:8;background:var(--cat2)">8</div>
+      <div class="persona-seg" style="flex:16;background:var(--cat3)">16</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat4)">6</div>
+    </div>
+    <div class="persona-total critical">34</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Researcher / Scholar</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:4;background:var(--cat1)">4</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat2)">6</div>
+      <div class="persona-seg" style="flex:12;background:var(--cat3)">12</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat4)">5</div>
+    </div>
+    <div class="persona-total">27</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Content Editor</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:1;background:var(--cat1)">1</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat2)">3</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat3)">6</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
+    </div>
+    <div class="persona-total">12</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Translator</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:3;background:var(--cat1)">3</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat2)">4</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat3)">6</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat4)">3</div>
+    </div>
+    <div class="persona-total">16</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">Content Producer</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">2</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat2)">3</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat3)">5</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">2</div>
+    </div>
+    <div class="persona-total">12</div>
+  </div>
+</div>
+
+<h3>The Time Math</h3>
+<p>We have <strong>2 UX designers</strong>. This platform is not our only project — it shares time with IslamQA, Aalam, Mashaykh, and others.</p>
+
+<div class="time-math">
+  <div class="time-math-row">
+    <span class="label">Total UX deliverables</span>
+    <span class="value">~106</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">Realistic time allocation to this project</span>
+    <span class="value">~30% per designer</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">Effective capacity</span>
+    <span class="value">0.6 of a designer</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">At ~1 deliverable/week at 30%</span>
+    <span class="value">~177 weeks</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">Add RTL + Islamic conventions overhead (+25%)</span>
+    <span class="value">~221 weeks</span>
+  </div>
+  <div class="time-math-row result">
+    <span class="label">UX layer alone</span>
+    <span class="value">~4.2 years</span>
+  </div>
+</div>
+
+<div class="callout callout-warning">
+  <strong>Even scoping down to 2 personas (Visitor + Student)</strong>
+  At 30% capacity: ~60 weeks of UX work — over a year — while still delivering on IslamQA, Aalam, and Mashaykh.
+</div>
+
+<h3>The Bottom Line</h3>
+<p>In principle, <strong>anything is doable</strong>. Nothing here is impossible. The question is: <strong>how much time will it take?</strong></p>
+<p>With the current scope (26 systems, 6 user personas, each system with its own scenarios, flows, research, and prototypes) — and the design team splitting time with other active projects — <strong>we're looking at years for the design layer alone</strong>, before any developer writes a line of code on those designs.</p>
+<p>The vision is ambitious and worthwhile. But we need to be honest: either dedicate a full team, or prioritize a focused starting scope and build from there.</p>
+
+</div>
+
+<!-- ============ ARABIC ============ -->
+<div id="content-ar" class="hidden">
+
+<h1>ملاحظات حول نطاق وحجم المنصة المقترحة</h1>
+<p class="subtitle">هذه ملاحظات من منظور تجربة المستخدم حول ما تطرحه خارطة الطريق الاستراتيجية لمنصة الحرمين المعرفية. الهدف ليس التشكيك بالرؤية — بل تسليط الضوء على حجم العمل المطلوب فعليًا مقارنةً بما هو متاح من وقت وطاقة.</p>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--accent)">٢٦</div>
+    <div class="stat-label">نظام مقترح</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--cat2)">٦</div>
+    <div class="stat-label">مشاريع مستقلة تقنيًا</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" style="color:var(--danger)">١١–١٥ ضعف</div>
+    <div class="stat-label">حجم العمل مقارنة بالـ CMS</div>
+  </div>
+</div>
+
+<h2><span class="num">١</span> الأنظمة الستة والعشرون</h2>
+<p>تطرح الخارطة ٢٦ نظامًا موزعة على ٦ محاور. غير أن هذه الأنظمة من الناحية التقنية تتشكّل في ٦ مشاريع مستقلة — لكلٍّ منها بنيته وفريقه ومتطلباته الخاصة.</p>
+
+<div class="callout callout-warning">
+  <strong>كل نظام من هذه الأنظمة = مشروع تصميمي مستقل</strong>
+  كل واحد يحتاج سيناريوهات أساسية وحالات استثنائية، مسارات مستخدم، أبحاث، نماذج أولية، اختبارات قابلية استخدام، وتصاميم نهائية. لا يمكن تصميم ٢٦ نظامًا بنفس الطريقة التي نصمم بها صفحة واحدة.
+</div>
+
+<div class="systems-grid">
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">خدمات المحتوى (المحور الأول)</span>
+      <span class="system-group-count">٦ أنظمة</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">خدمات النصوص (التعرف الضوئي، التفريغ)</span>
+      <span class="system-tag">نظام الفهرسة الموحد</span>
+      <span class="system-tag">الرسم المعرفي (Knowledge Graph)</span>
+      <span class="system-tag">معجم المصطلحات الشرعية</span>
+      <span class="system-tag">نظام الفهارس المتقدم</span>
+      <span class="system-tag">منظومة الإثراء الآلي</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">الموسوعات (المحور الثاني)</span>
+      <span class="system-group-count">٦ أنظمة</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">موسوعة التفسير الجامع</span>
+      <span class="system-tag">موسوعة الحديث الشريف</span>
+      <span class="system-tag">جامع المسائل الفقهية</span>
+      <span class="system-tag">موسوعة المتون العلمية</span>
+      <span class="system-tag">مساعد المترجم الشرعي</span>
+      <span class="system-tag">موسوعات إثرائية إضافية (٤ فرعية)</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">الوسائط التفاعلية (المحور الثالث)</span>
+      <span class="system-group-count">نظامان</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">الخرائط الذهنية التفاعلية</span>
+      <span class="system-tag">الإنفوجرافيك العلمي</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">التعليم والتدريب (المحور الرابع)</span>
+      <span class="system-group-count">٩ أنظمة</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">برنامج طالب العلم (٥ مستويات)</span>
+      <span class="system-tag">بوابات التعلم الإلكتروني</span>
+      <span class="system-tag">التلخيص الذكي</span>
+      <span class="system-tag">مكتبة الاقتباسات</span>
+      <span class="system-tag">نظام التدوين والمذاكرة</span>
+      <span class="system-tag">التدريب واختبارات الفهم</span>
+      <span class="system-tag">التحفيز (شارات، نقاط، مسابقات)</span>
+      <span class="system-tag">التوليد الآلي للأسئلة (AQG)</span>
+      <span class="system-tag">بنك التدريبات التفاعلية</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">النشر (المحور الخامس)</span>
+      <span class="system-group-count">نظام واحد</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">تحويل الدرس الصوتي إلى كتاب</span>
+    </div>
+  </div>
+  <div class="system-group">
+    <div class="system-group-header">
+      <span class="system-group-title">الخدمات الذكية (المحور السادس)</span>
+      <span class="system-group-count">نظامان</span>
+    </div>
+    <div class="system-items">
+      <span class="system-tag">المساعد الذكي للزوار (روبوت محادثة)</span>
+      <span class="system-tag">تطبيق الجوال (يعمل بدون إنترنت، بحث صوتي)</span>
+    </div>
+  </div>
+</div>
+
+<h2><span class="num">٢</span> الحجم الفعلي مقارنة بنظام إدارة المحتوى</h2>
+<p>ما لدينا حاليًا هو نظام إدارة محتوى (مشكاة) مبني على ووردبريس — يضم أكثر من ٣٠ نوع محتوى، لكن ووردبريس نفسه يتحمّل نحو ٧٠٪ من التعقيد. بقية المشاريع المقترحة لا تملك هذه الميزة — جميعها بناء من الصفر.</p>
+
+<div class="scale-chart">
+  <div class="scale-row">
+    <div class="scale-label">نظام إدارة المحتوى (مشكاة)</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:8%;background:var(--cat1)">١x</div></div>
+    <div class="scale-value" style="color:var(--cat1)">١x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">الواجهة العامة للمستخدم</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:20%;background:var(--cat2)"></div></div>
+    <div class="scale-value">٢–٣x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">خط معالجة المحتوى</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:14%;background:var(--cat3)"></div></div>
+    <div class="scale-value">١.٥–٢x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">خدمات الذكاء الاصطناعي</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:20%;background:var(--cat4)"></div></div>
+    <div class="scale-value">٢–٣x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">المنصة التعليمية (LMS)</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:28%;background:var(--danger)"></div></div>
+    <div class="scale-value" style="color:var(--danger)">٣–٤x</div>
+  </div>
+  <div class="scale-row">
+    <div class="scale-label">تطبيق الجوال</div>
+    <div class="scale-bar-container"><div class="scale-bar" style="width:14%;background:var(--cat5)"></div></div>
+    <div class="scale-value">١.٥–٢x</div>
+  </div>
+</div>
+
+<div class="callout callout-danger">
+  <strong>المجموع: ١١–١٥ ضعف حجم نظام إدارة المحتوى</strong>
+  نظام إدارة المحتوى هو الجزء الأسهل لأن ووردبريس يتحمل الجزء الأكبر. كل مشروع ثاني يُبنى بالكامل من الصفر بدون منصة جاهزة تسنده.
+</div>
+
+<h2><span class="num">٣</span> مقارنة مع منصات قائمة</h2>
+<p>الخارطة تطمح لبناء ما يعادل — بل يتجاوز — وظائف منصات قائمة، كل واحدة منها بناها فريق متفرغ على مدار سنوات:</p>
+
+<table>
+  <thead>
+    <tr><th>ما تطرحه الخارطة</th><th>المنصة المقابلة</th><th>عمرها</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>موسوعة تفسير + صوتيات</td><td>Quran.com</td><td>+١٥ سنة</td></tr>
+    <tr><td>موسوعة حديث وفقه</td><td>الدرر السنية</td><td>+١٠ سنوات</td></tr>
+    <tr><td>مكتبة +١٠ آلاف كتاب مع بحث</td><td>المكتبة الشاملة</td><td>+٢٠ سنة</td></tr>
+    <tr><td>دورات ومسارات تعليمية</td><td>مجالس</td><td>عدة سنوات</td></tr>
+    <tr><td>خرائط ذهنية تفاعلية</td><td>MindMeister</td><td>+١٥ سنة</td></tr>
+    <tr><td>تلخيص ذكي وأسئلة وأجوبة</td><td>Google NotebookLM</td><td>فريق جوجل للذكاء الاصطناعي</td></tr>
+    <tr class="highlight-row"><td colspan="3">بالإضافة إلى: الرسم المعرفي، مساعد الترجمة الشرعية، التوليد الآلي للأسئلة، التحفيز — وهذه لا تقدمها أي من المنصات أعلاه</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">٤</span> الواقع من منظور تجربة المستخدم</h2>
+<p>تخاطب المنصة <strong>٦ شرائح مستخدمين مختلفة</strong>، لكلٍّ منها أهداف وأنماط تفاعل تختلف عن غيرها. وهذا المشروع ليس المشروع الوحيد — بل يتشارك وقت الفريق مع مشاريع قائمة فعليًا:</p>
+
+<div class="project-list">
+  <span class="project-chip active">IslamQA</span>
+  <span class="project-chip active">أعلام</span>
+  <span class="project-chip active">مشايخ</span>
+  <span class="project-chip active">مشاريع أخرى</span>
+  <span class="project-chip proposed">منصة الحرمين (٢٦ نظام، ٦ شرائح)</span>
+</div>
+
+<h3>ماذا يحتاج كل نظام تصميميًا؟</h3>
+<p>كل نظام من الـ ٢٦ يحتاج على الأقل: بحث عن المستخدمين، مسارات استخدام رئيسية وفرعية، حالات استثنائية (edge cases)، نماذج أولية (prototypes)، تصاميم شاشات، واختبارات قابلية استخدام. هذا ليس شغل صفحة وحدة — كل نظام عالم لحاله.</p>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat1)"></span> بحث ودراسة</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat2)"></span> مسارات المستخدم</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat3)"></span> شاشات وتصاميم</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--cat4)"></span> اختبار وتقييم</div>
+</div>
+
+<div class="persona-chart">
+  <div class="persona-row">
+    <div class="persona-name">الزائر العادي</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
+      <div class="persona-seg" style="flex:8;background:var(--cat3)">٨</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat4)">٣</div>
+    </div>
+    <div class="persona-total">١٧</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name" style="font-weight:700">طالب العلم</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
+      <div class="persona-seg" style="flex:8;background:var(--cat2)">٨</div>
+      <div class="persona-seg" style="flex:16;background:var(--cat3)">١٦</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat4)">٦</div>
+    </div>
+    <div class="persona-total critical">٣٤</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">الباحث أو العالم</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:4;background:var(--cat1)">٤</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat2)">٦</div>
+      <div class="persona-seg" style="flex:12;background:var(--cat3)">١٢</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat4)">٥</div>
+    </div>
+    <div class="persona-total">٢٧</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">محرر المحتوى</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:1;background:var(--cat1)">١</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat2)">٣</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat3)">٦</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
+    </div>
+    <div class="persona-total">١٢</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">المترجم</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:3;background:var(--cat1)">٣</div>
+      <div class="persona-seg" style="flex:4;background:var(--cat2)">٤</div>
+      <div class="persona-seg" style="flex:6;background:var(--cat3)">٦</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat4)">٣</div>
+    </div>
+    <div class="persona-total">١٦</div>
+  </div>
+  <div class="persona-row">
+    <div class="persona-name">منتج المحتوى</div>
+    <div class="persona-bar-track">
+      <div class="persona-seg" style="flex:2;background:var(--cat1)">٢</div>
+      <div class="persona-seg" style="flex:3;background:var(--cat2)">٣</div>
+      <div class="persona-seg" style="flex:5;background:var(--cat3)">٥</div>
+      <div class="persona-seg" style="flex:2;background:var(--cat4)">٢</div>
+    </div>
+    <div class="persona-total">١٢</div>
+  </div>
+</div>
+
+<h3>حسبة الوقت</h3>
+<p>لدينا <strong>مصممان اثنان</strong> لتجربة المستخدم. هذه المنصة ليست مشروعنا الوحيد — تتقاسم الوقت مع IslamQA وأعلام ومشايخ ومشاريع أخرى.</p>
+
+<div class="time-math">
+  <div class="time-math-row">
+    <span class="label">إجمالي المخرجات التصميمية المطلوبة</span>
+    <span class="value">~١٠٦ مخرج</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">الوقت الذي يمكن تخصيصه واقعيًا</span>
+    <span class="value">~٣٠٪ من وقت كل مصمم</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">الطاقة الفعلية</span>
+    <span class="value">٠.٦ مصمم</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">بمعدل مخرج واحد بالأسبوع عند ٣٠٪</span>
+    <span class="value">~١٧٧ أسبوع</span>
+  </div>
+  <div class="time-math-row">
+    <span class="label">مع احتساب تعقيدات العربية واتجاه RTL (+٢٥٪)</span>
+    <span class="value">~٢٢١ أسبوع</span>
+  </div>
+  <div class="time-math-row result">
+    <span class="label">التصميم وحده بدون البرمجة</span>
+    <span class="value">~٤.٢ سنة</span>
+  </div>
+</div>
+
+<div class="callout callout-warning">
+  <strong>حتى لو قلّصنا لشريحتين فقط (الزائر + طالب العلم)</strong>
+  بنسبة ٣٠٪ من وقتنا: نحو ٦٠ أسبوعًا من العمل التصميمي — أي أكثر من سنة — مع استمرار التسليم على IslamQA وأعلام ومشايخ بالتوازي.
+</div>
+
+<h3>الخلاصة</h3>
+<p>من حيث المبدأ، <strong>أي شيء يمكن تنفيذه</strong>. لا يوجد ما هو مستحيل. لكن السؤال الجوهري هو: <strong>خلال كم من الوقت؟</strong></p>
+<p>بالنطاق الحالي (٢٦ نظامًا، ٦ شرائح مستخدمين، كل نظام له سيناريوهاته ومساراته وأبحاثه ونماذجه الأولية) — والفريق التصميمي يعمل على مشاريع أخرى بالتوازي — <strong>فإننا نتحدث عن سنوات للتصميم وحده</strong>، قبل أن يبدأ أي مطوّر بكتابة سطر كود على هذه التصاميم.</p>
+<p>الرؤية طموحة وجديرة بالاهتمام. لكن يجب أن نكون صريحين: إما أن نخصّص فريقًا متفرغًا لهذا المشروع، أو نرتّب الأولويات ونبدأ بمرحلة محدودة النطاق ونبني عليها تدريجيًا.</p>
+
+</div>
+
+<script>
+function setLang(lang) {
+  const html = document.documentElement;
+  const en = document.getElementById('content-en');
+  const ar = document.getElementById('content-ar');
+  const btnEn = document.getElementById('btn-en');
+  const btnAr = document.getElementById('btn-ar');
+
+  if (lang === 'ar') {
+    html.setAttribute('lang', 'ar');
+    html.setAttribute('dir', 'rtl');
+    en.classList.add('hidden');
+    ar.classList.remove('hidden');
+    btnAr.classList.add('active');
+    btnEn.classList.remove('active');
+  } else {
+    html.setAttribute('lang', 'en');
+    html.setAttribute('dir', 'ltr');
+    ar.classList.add('hidden');
+    en.classList.remove('hidden');
+    btnEn.classList.add('active');
+    btnAr.classList.remove('active');
+  }
+}
+</script>
+
+</body>
+</html>
